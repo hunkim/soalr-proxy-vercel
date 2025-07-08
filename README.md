@@ -4,7 +4,7 @@ This is a FastAPI-based proxy server for the Upstage AI Solar API, designed to b
 
 ## Features
 
-- **Proxy Endpoint** (`/proxy`): Proxies requests to Solar 1 Mini Chat model for summarization
+- **Summary Endpoint** (`/summary`): Proxies requests to Solar 1 Mini Chat model for summarization
 - **Google Function Endpoint** (`/solar-google-fc`): Proxies requests to Solar Pro model for advanced summarization
 - **Rate Limiting**: 10 requests per minute per IP
 - **CORS**: Configured to allow all origins
@@ -42,7 +42,7 @@ UPSTAGE_API_KEY=your_upstage_api_key_here
 ### GET /
 Returns API status and version information.
 
-### POST /proxy
+### POST /summary
 Proxies summarization requests to Solar 1 Mini Chat model.
 
 **Request Headers:**
@@ -118,4 +118,22 @@ The API returns appropriate HTTP status codes:
 
 ## CORS
 
-The API is configured to allow all origins, methods, and headers for maximum compatibility. # soalr-proxy-vercel
+The API is configured to allow all origins, methods, and headers for maximum compatibility.
+
+## API Usage:
+
+Once deployed, you can use your endpoints like this:
+
+```bash
+# Test the summary endpoint
+curl -X POST "https://your-vercel-domain.vercel.app/summary" \
+  -H "Authorization: Bearer your_api_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "solar-summarizer",
+    "messages": [
+      {"role": "system", "content": "Summarize the following text:"},
+      {"role": "user", "content": "Your text to summarize here"}
+    ]
+  }'
+```
