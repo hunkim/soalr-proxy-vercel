@@ -144,5 +144,9 @@ async def arxiv(request: Request, authorization: str = Header(None)):
 
     return StreamingResponse(event_generator(api_key, payload), media_type="text/event-stream")
 
-# For Vercel, we need to export the app
-handler = app 
+# Export for Vercel
+def handler(request, context):
+    return app
+
+# Alternative handler for newer Vercel
+app_handler = app 
